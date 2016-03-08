@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '1.3.3.RELEASE'
+        frontendRoot = 'frontend'
     }
     
     repositories {
@@ -11,6 +12,27 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
+
+plugins {
+    id "com.moowork.node" version "0.11"
+}
+
+node {
+    version = '5.6.0'
+    download = true
+    nodeModulesDir = file("${project.projectDir}/${frontendRoot}/")
+}
+
+task bowerInstall(type: NodeTask) {
+    workingDir frontendRoot
+    script = file("${frontendRoot}/node_modules/bower/bin/bower")
+    args = ['install']
+    inputs.files file("${frontendRoot}/bower.json")
+    outputs.files file("${frontendRoot}/bower_components")
+    
+    dependsOn npmInstall
+}
+
 
 group 'org.kelog'
 version '1.0-SNAPSHOT'
