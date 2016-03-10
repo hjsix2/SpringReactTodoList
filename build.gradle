@@ -33,6 +33,16 @@ task bowerInstall(type: NodeTask) {
     dependsOn npmInstall
 }
 
+task gulpDist(type: NodeTask) {
+    workingDir frontendRoot
+    script = file("${frontendRoot}/node_modules/.bin/gulp")
+    args = ['dist']
+    inputs.files file("${frontendRoot}")
+    outputs.files file("${project.projectDir}/public/")
+
+    dependsOn npmInstall
+    dependsOn bowerInstall
+}
 
 group 'org.kelog'
 version '1.0-SNAPSHOT'
@@ -50,3 +60,5 @@ repositories {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 }
+
+bootRun.dependsOn gulpDist

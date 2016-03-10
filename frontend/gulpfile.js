@@ -46,3 +46,4 @@ gulp.task('babel', function () {
 });
 
 gulp.task('default', ['copy-html', 'copy-and-concat-css', 'copy-and-concat-libs', 'babel']);
+gulp.task('dist', ['default']);
