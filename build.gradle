@@ -26,7 +26,7 @@ node {
 task bowerInstall(type: NodeTask) {
     workingDir frontendRoot
     script = file("${frontendRoot}/node_modules/bower/bin/bower")
-    args = ['install']
+    args = ['--allow-root', 'install']
     inputs.files file("${frontendRoot}/bower.json")
     outputs.files file("${frontendRoot}/bower_components")
     
