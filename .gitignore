@@ -4,3 +4,5 @@ build/
 .gradle
 frontend/bower_components/
 frontend/node_modules/
+public/
+typings/
