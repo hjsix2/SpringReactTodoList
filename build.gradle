@@ -59,6 +59,8 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testCompile("org.assertj:assertj-core:3.3.0")
 }
 
 bootRun.dependsOn gulpDist
