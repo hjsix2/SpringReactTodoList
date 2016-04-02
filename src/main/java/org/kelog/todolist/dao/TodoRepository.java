@@ -1,17 +1,12 @@
 package org.kelog.todolist.dao;
 
-import org.kelog.todolist.model.TodoItem;
+import org.kelog.todolist.model.Todo;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.Optional;
 
-public interface TodoRepository {
-    Collection<TodoItem> findAll();
-    
-    TodoItem findById(int id);
-    
-    TodoItem create(String description, TodoItem.Importance importance);
-    
-    TodoItem update(int id, String description, TodoItem.Importance importance);
-    
-    void delete(int id);
+@Repository
+public interface TodoRepository extends JpaRepository<Todo, Integer> {
+    Optional<Todo> findById(int id);
 }
