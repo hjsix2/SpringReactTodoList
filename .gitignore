@@ -6,3 +6,4 @@ frontend/bower_components/
 frontend/node_modules/
 public/
 typings/
+integration/node_modules
