@@ -1,7 +1,6 @@
 package org.kelog.todolist.service;
 
 import org.kelog.todolist.dao.TodoRepository;
-import org.kelog.todolist.model.Importance;
 import org.kelog.todolist.model.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,12 +28,12 @@ public class TodoServiceImpl implements TodoService {
     }
     
     @Override
-    public Todo create(String description, Importance importance) {
+    public Todo create(String description, Boolean importance) {
         return repository.save(new Todo(description, importance));
     }
     
     @Override
-    public Todo update(int id, String description, Importance importance) {
+    public Todo update(int id, String description, Boolean importance) {
         Todo item = findOrThrow(id);
         item.setDescription(description);
         item.setImportance(importance);

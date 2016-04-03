@@ -1,6 +1,5 @@
 package org.kelog.todolist.web;
 
-import org.kelog.todolist.model.Importance;
 import org.kelog.todolist.model.Todo;
 import org.kelog.todolist.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ public class TodoController {
         public String description;
         
         @NotNull
-        public Importance importance;
+        public Boolean importance;
     }
     
     private static class TodoItemCreateDto {
@@ -72,7 +71,7 @@ public class TodoController {
         public String description;
         
         @NotNull
-        public Importance importance;
+        public Boolean importance;
     }
 }
 

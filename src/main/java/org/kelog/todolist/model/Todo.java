@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Todo {
     
     private String description;
-    private Importance importance;
+    private Boolean importance;
     
     @Id
     @GeneratedValue
@@ -19,7 +19,7 @@ public class Todo {
     public Todo() { // JPA
     }
     
-    public Todo(String description, Importance importance) {
+    public Todo(String description, Boolean importance) {
         this.description = Objects.requireNonNull(description);
         this.importance = Objects.requireNonNull(importance);
     }
@@ -32,11 +32,11 @@ public class Todo {
         this.description = description;
     }
     
-    public Importance getImportance() {
+    public Boolean getImportance() {
         return importance;
     }
     
-    public void setImportance(Importance importance) {
+    public void setImportance(Boolean importance) {
         this.importance = importance;
     }
     
