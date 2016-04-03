@@ -40,7 +40,7 @@ gulp.task('copy-and-concat-libs', function () {
 gulp.task('babel', function () {
     return gulp.src(sources.jsx)
         .pipe(babel({
-            presets: ['react'],
+            presets: ['react', 'es2015'],
             compact: false
         }))
         .pipe(concat('app.js'))
