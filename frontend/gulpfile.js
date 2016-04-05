@@ -10,6 +10,7 @@ var sources = {
         'bower_components/react/react-with-addons.js',
         'bower_components/react/react-dom.js',
         'bower_components/lodash/lodash.js',
+        'bower_components/browser-request/dist/browser/request.js',
         'app/DAO.js'
     ],
     css: [

@@ -64,7 +64,7 @@ frisby.create('Creating new todo item')
     })
     .afterJSON(function (json) {
         frisby.create('Then updating it with valid properties')
-            .put(baseUrl + '/todoitems/' + json.id, {
+            .patch(baseUrl + '/todoitems/' + json.id, {
                 description: 'Updated',
                 importance: true
             }, jsonTrue)
@@ -95,7 +95,7 @@ frisby.create('Trying to post invalid (here empty) json should result in an erro
     .toss();
 
 frisby.create('Trying to update nonexistent item should result in an error')
-    .put(baseUrl + '/todoitems/424242', {
+    .patch(baseUrl + '/todoitems/424242', {
         description: 'Updated',
         importance: true
     }, jsonTrue)
@@ -115,13 +115,6 @@ frisby.create('Creating new todo item')
     })
     .expectJSONTypes({
         id: Number
-    })
-    .afterJSON(function (json) {
-        frisby.create('Then trying to update it with wrong props')
-            .put(baseUrl + '/todoitems/' + json.id, {}, jsonTrue)
-            .expectStatus(HttpStatus.BAD_REQUEST)
-            .toss()
-
     })
     .toss();
 

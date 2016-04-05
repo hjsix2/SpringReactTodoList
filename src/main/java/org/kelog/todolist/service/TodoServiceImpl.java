@@ -35,8 +35,15 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo update(int id, String description, Boolean importance) {
         Todo item = findOrThrow(id);
-        item.setDescription(description);
-        item.setImportance(importance);
+        
+        if (description != null) {
+            item.setDescription(description);
+        }
+        
+        if (importance != null) {
+            item.setImportance(importance);
+        }
+        
         return repository.save(item);
     }
     

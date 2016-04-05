@@ -131,7 +131,7 @@ var TodoList = React.createClass({
         var items = this.state.items.map((item) =>
             <TodoItem
                 description={item.description}
-                important={item.important}
+                important={item.importance}
                 key={item.id}
                 remove={this.remove.bind(this, item.id)}
                 update={this.update.bind(this, item.id)}

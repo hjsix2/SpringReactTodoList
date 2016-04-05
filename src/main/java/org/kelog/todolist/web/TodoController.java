@@ -41,7 +41,7 @@ public class TodoController {
         }
     }
     
-    @RequestMapping(value = "/todoitems/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/todoitems/{id}", method = RequestMethod.PATCH)
     public ResponseEntity<Todo> update(@PathVariable int id, @RequestBody @Valid TodoItemUpdateDto dto,
                                        BindingResult result) {
         if (result.hasErrors()) {
@@ -52,17 +52,15 @@ public class TodoController {
     }
     
     @RequestMapping(value = "/todoitems/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Todo> update(@PathVariable int id) {
+    public ResponseEntity<Todo> delete(@PathVariable int id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
     @SuppressWarnings("WeakerAccess")
     private static class TodoItemUpdateDto {
-        @NotNull
         public String description;
         
-        @NotNull
         public Boolean importance;
     }
     
