@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Todo {
     
     private String description;
-    private Boolean importance;
+    private Boolean important;
     
     @Id
     @GeneratedValue
@@ -19,9 +19,9 @@ public class Todo {
     public Todo() { // JPA
     }
     
-    public Todo(String description, Boolean importance) {
+    public Todo(String description, Boolean important) {
         this.description = Objects.requireNonNull(description);
-        this.importance = Objects.requireNonNull(importance);
+        this.important = Objects.requireNonNull(important);
     }
     
     public String getDescription() {
@@ -32,12 +32,12 @@ public class Todo {
         this.description = description;
     }
     
-    public Boolean getImportance() {
-        return importance;
+    public Boolean getImportant() {
+        return important;
     }
     
-    public void setImportance(Boolean importance) {
-        this.importance = importance;
+    public void setImportant(Boolean important) {
+        this.important = important;
     }
     
     public int getId() {
@@ -55,13 +55,13 @@ public class Todo {
         
         Todo todo = (Todo) o;
         
-        return id == todo.id && (description != null ? description.equals(todo.description) : todo.description == null && importance == todo.importance);
+        return id == todo.id && (description != null ? description.equals(todo.description) : todo.description == null && important == todo.important);
     }
     
     @Override
     public int hashCode() {
         int result = description != null ? description.hashCode() : 0;
-        result = 31 * result + (importance != null ? importance.hashCode() : 0);
+        result = 31 * result + (important != null ? important.hashCode() : 0);
         result = 31 * result + id;
         return result;
     }

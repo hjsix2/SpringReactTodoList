@@ -20,7 +20,7 @@ var DAO = (function () {
                         url: baseUrl,
                         method: 'POST',
                         json: true,
-                        body: {description: props.description, importance: props.important}
+                        body: {description: props.description, important: props.important}
                     },
                     (err, response, body) => err ? reject(err) : resolve(body)
                 )
@@ -38,12 +38,6 @@ var DAO = (function () {
             });
         },
         update(id, props) {
-            // TODO fix the following hack
-            if (props.hasOwnProperty('important')) {
-                props.importance = props.important;
-                delete props.important;
-            }
-
             return new Promise((resolve, reject) => {
                 request({
                         url: baseUrl + '/' + id,

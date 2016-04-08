@@ -37,7 +37,7 @@ public class TodoController {
         if (result.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<>(service.create(dto.description, dto.importance), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.create(dto.description, dto.important), HttpStatus.CREATED);
         }
     }
     
@@ -48,7 +48,7 @@ public class TodoController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         
-        return new ResponseEntity<>(service.update(id, dto.description, dto.importance), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(id, dto.description, dto.important), HttpStatus.OK);
     }
     
     @RequestMapping(value = "/todoitems/{id}", method = RequestMethod.DELETE)
@@ -61,7 +61,7 @@ public class TodoController {
     private static class TodoItemUpdateDto {
         public String description;
         
-        public Boolean importance;
+        public Boolean important;
     }
     
     private static class TodoItemCreateDto {
@@ -69,7 +69,7 @@ public class TodoController {
         public String description;
         
         @NotNull
-        public Boolean importance;
+        public Boolean important;
     }
 }
 

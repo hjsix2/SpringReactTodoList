@@ -27,12 +27,12 @@ frisby.create('Trying to access nonexistent item should result in an error')
 frisby.create('Creating new todo item')
     .post(baseUrl + '/todoitems', {
         description: 'Some description here',
-        importance: true
+        important: true
     }, jsonTrue)
     .expectStatus(HttpStatus.CREATED)
     .expectJSON({
         description: 'Some description here',
-        importance: true
+        important: true
     })
     .expectJSONTypes({
         id: Number
@@ -43,7 +43,7 @@ frisby.create('Creating new todo item')
             .expectStatus(HttpStatus.OK)
             .expectJSON({
                 description: 'Some description here',
-                importance: true
+                important: true
             })
             .toss();
     })
@@ -52,12 +52,12 @@ frisby.create('Creating new todo item')
 frisby.create('Creating new todo item')
     .post(baseUrl + '/todoitems', {
         description: 'Some description here',
-        importance: true
+        important: true
     }, jsonTrue)
     .expectStatus(HttpStatus.CREATED)
     .expectJSON({
         description: 'Some description here',
-        importance: true
+        important: true
     })
     .expectJSONTypes({
         id: Number
@@ -66,12 +66,12 @@ frisby.create('Creating new todo item')
         frisby.create('Then updating it with valid properties')
             .patch(baseUrl + '/todoitems/' + json.id, {
                 description: 'Updated',
-                importance: true
+                important: true
             }, jsonTrue)
             .expectStatus(HttpStatus.OK)
             .expectJSON({
                 description: 'Updated',
-                importance: true
+                important: true
             })
             .afterJSON(function (json) {
                 frisby.create('Should return updated item')
@@ -79,7 +79,7 @@ frisby.create('Creating new todo item')
                     .expectStatus(HttpStatus.OK)
                     .expectJSON({
                         description: 'Updated',
-                        importance: true
+                        important: true
                     })
                     .toss()
 
@@ -97,7 +97,7 @@ frisby.create('Trying to post invalid (here empty) json should result in an erro
 frisby.create('Trying to update nonexistent item should result in an error')
     .patch(baseUrl + '/todoitems/424242', {
         description: 'Updated',
-        importance: true
+        important: true
     }, jsonTrue)
     .expectStatus(HttpStatus.NOT_FOUND)
     .toss();
@@ -106,12 +106,12 @@ frisby.create('Trying to update nonexistent item should result in an error')
 frisby.create('Creating new todo item')
     .post(baseUrl + '/todoitems', {
         description: 'Some description here',
-        importance: true
+        important: true
     }, jsonTrue)
     .expectStatus(HttpStatus.CREATED)
     .expectJSON({
         description: 'Some description here',
-        importance: true
+        important: true
     })
     .expectJSONTypes({
         id: Number
@@ -121,12 +121,12 @@ frisby.create('Creating new todo item')
 frisby.create('Creating new todo item')
     .post(baseUrl + '/todoitems', {
         description: 'Some description here',
-        importance: true
+        important: true
     }, jsonTrue)
     .expectStatus(HttpStatus.CREATED)
     .expectJSON({
         description: 'Some description here',
-        importance: true
+        important: true
     })
     .expectJSONTypes({
         id: Number

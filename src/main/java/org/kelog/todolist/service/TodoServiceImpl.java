@@ -28,8 +28,8 @@ public class TodoServiceImpl implements TodoService {
     }
     
     @Override
-    public Todo create(String description, Boolean importance) {
-        return repository.save(new Todo(description, importance));
+    public Todo create(String description, Boolean important) {
+        return repository.save(new Todo(description, important));
     }
     
     @Override
@@ -41,7 +41,7 @@ public class TodoServiceImpl implements TodoService {
         }
         
         if (importance != null) {
-            item.setImportance(importance);
+            item.setImportant(importance);
         }
         
         return repository.save(item);
