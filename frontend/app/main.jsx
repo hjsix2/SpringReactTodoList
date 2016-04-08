@@ -87,9 +87,9 @@ var NewItemRow = React.createClass({
                     </form>
                 </td>
                 <td>
-                    <div class="checkbox ">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" checkedLink={this.linkState('important')}>Important</input>
+                    <div className="checkbox ">
+                        <label className="checkbox-inline">
+                            <input type="checkbox" checkedLink={this.linkState('important')}/>Important
                         </label>
                     </div>
                     <button className="btn btn-primary" onClick={this.save}>Save</button>
