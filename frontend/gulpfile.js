@@ -3,15 +3,15 @@ var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 
 var sources = {
-    jsx: [
+    babel: [
+        'app/DAO.js',
         'app/main.jsx'
     ],
     js: [
         'bower_components/react/react-with-addons.js',
         'bower_components/react/react-dom.js',
         'bower_components/lodash/lodash.js',
-        'bower_components/browser-request/dist/browser/request.js',
-        'app/DAO.js'
+        'bower_components/browser-request/dist/browser/request.js'
     ],
     css: [
         'bower_components/bootstrap/dist/css/bootstrap.css'
@@ -39,7 +39,7 @@ gulp.task('copy-and-concat-libs', function () {
 });
 
 gulp.task('babel', function () {
-    return gulp.src(sources.jsx)
+    return gulp.src(sources.babel)
         .pipe(babel({
             presets: ['react', 'es2015'],
             compact: false
@@ -51,7 +51,7 @@ gulp.task('babel', function () {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch([].concat(sources.jsx, sources.html, sources.js, sources.css), ['default']);
+    gulp.watch([].concat(sources.babel, sources.html, sources.js, sources.css), ['default']);
 });
 
 gulp.task('all', ['copy-html', 'copy-and-concat-css', 'copy-and-concat-libs', 'babel']);

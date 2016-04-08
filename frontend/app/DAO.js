@@ -1,66 +1,57 @@
 var DAO = (function () {
-    var baseUrl = '/todoitems';
+    const baseUrl = '/todoitems';
 
     return {
-        findAll: function () {
-            return new Promise(function (resolve, reject) {
+        findAll() {
+            return new Promise((resolve, reject) => {
                 request({
-                    url: baseUrl,
-                    method: 'GET',
-                    json: true
-                }, function (err, response, body) {
-                    err ? reject(err) : resolve(body);
-                })
+                        url: baseUrl,
+                        method: 'GET',
+                        json: true
+                    },
+                    (err, response, body) => err ? reject(err) : resolve(body)
+                )
             })
         },
 
-        save: function (props) {
-            return new Promise(function (resolve, reject) {
-                request(
-                    {
+        save(props) {
+            return new Promise((resolve, reject) => {
+                request({
                         url: baseUrl,
                         method: 'POST',
                         json: true,
                         body: {description: props.description, importance: props.important}
                     },
-                    function (err, response, body) {
-                        err ? reject(err) : resolve(body);
-                    }
+                    (err, response, body) => err ? reject(err) : resolve(body)
                 )
             })
         },
-        
-        remove: function (id) {
-            return new Promise(function (resolve, reject) {
-                request(
-                    {
+
+        remove(id) {
+            return new Promise((resolve, reject) => {
+                request({
                         url: baseUrl + '/' + id,
                         method: 'DELETE'
                     },
-                    function (err) {
-                        err ? reject(err) : resolve(true);
-                    }
+                    (err) => err ? reject(err) : resolve(true)
                 );
             });
         },
-        update: function (id, props) {
+        update(id, props) {
             // TODO fix the following hack
             if (props.hasOwnProperty('important')) {
                 props.importance = props.important;
                 delete props.important;
             }
 
-            return new Promise(function (resolve, reject) {
-                request(
-                    {
+            return new Promise((resolve, reject) => {
+                request({
                         url: baseUrl + '/' + id,
                         method: 'PATCH',
                         json: true,
                         body: props
                     },
-                    function (err, response, body) {
-                        err ? reject(err) : resolve(body);
-                    }
+                    (err, response, body) => err ? reject(err) : resolve(body)
                 );
             });
         }
