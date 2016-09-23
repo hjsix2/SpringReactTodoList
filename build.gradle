@@ -3,11 +3,11 @@ buildscript {
         springBootVersion = '1.3.3.RELEASE'
         frontendRoot = 'frontend'
     }
-    
+
     repositories {
         mavenCentral()
     }
-    
+
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
@@ -18,31 +18,25 @@ plugins {
 }
 
 node {
-    version = '5.6.0'
+    version = '6.4.0'
     download = true
     nodeModulesDir = file("${project.projectDir}/${frontendRoot}/")
 }
 
-task bowerInstall(type: NodeTask) {
+task buildFrontend(type: NpmTask) {
     workingDir frontendRoot
-    script = file("${frontendRoot}/node_modules/bower/bin/bower")
-    args = ['--allow-root', 'install']
-    inputs.files file("${frontendRoot}/bower.json")
-    outputs.files file("${frontendRoot}/bower_components")
+    args = ['run', 'build']
     
-    dependsOn npmInstall
-}
-
-task gulpDist(type: NodeTask) {
-    workingDir frontendRoot
-    script = file("${frontendRoot}/node_modules/.bin/gulp")
-    args = ['dist']
     inputs.files file("${frontendRoot}")
-    outputs.files file("${project.projectDir}/public/")
-
-    dependsOn npmInstall
-    dependsOn bowerInstall
+    outputs.files file("${frontendRoot}/build")
 }
+
+task copyFrontendToPublic(type: Copy) {
+    from "${frontendRoot}/build"
+    into "public" 
+}
+
+copyFrontendToPublic.dependsOn buildFrontend
 
 group 'org.kelog'
 version '1.0-SNAPSHOT'
@@ -62,7 +56,6 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     runtime('com.h2database:h2')
-    testCompile("org.assertj:assertj-core:3.3.0")
 }
 
-bootRun.dependsOn gulpDist
+bootRun.dependsOn buildFrontend, copyFrontendToPublic
