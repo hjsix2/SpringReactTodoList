@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 public class TodoController {
     
+    private final String ROOT = "/todoitems";
     private TodoService service;
     
     @Autowired
@@ -22,36 +24,45 @@ public class TodoController {
         this.service = service;
     }
     
-    @RequestMapping(value = "/todoitems", method = RequestMethod.GET)
+    @RequestMapping(value = ROOT, method = RequestMethod.GET)
     public Collection<Todo> list() {
         return service.findAll();
     }
     
-    @RequestMapping(value = "/todoitems/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = ROOT + "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Todo> list(@PathVariable int id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
-    }
-    
-    @RequestMapping(value = "/todoitems", method = RequestMethod.POST)
-    public ResponseEntity<Todo> create(@RequestBody @Valid TodoItemCreateDto dto, BindingResult result) {
-        if (result.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Optional<Todo> todo = service.findById(id);
+        
+        if (todo.isPresent()) {
+            return new ResponseEntity<>(todo.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(service.create(dto.description, dto.important), HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
-    @RequestMapping(value = "/todoitems/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = ROOT, method = RequestMethod.POST)
+    public ResponseEntity<Todo> create(@RequestBody @Valid TodoItemCreateDto dto, BindingResult result) {
+        if (!result.hasErrors()) {
+            return new ResponseEntity<>(
+                    service.create(dto.description, dto.important),
+                    HttpStatus.CREATED
+            );
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    @RequestMapping(value = ROOT + "/{id}", method = RequestMethod.PATCH)
     public ResponseEntity<Todo> update(@PathVariable int id, @RequestBody @Valid TodoItemUpdateDto dto,
                                        BindingResult result) {
-        if (result.hasErrors()) {
+        if (!result.hasErrors()) {
+            return new ResponseEntity<>(service.update(id, dto.description, dto.important), HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        
-        return new ResponseEntity<>(service.update(id, dto.description, dto.important), HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/todoitems/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = ROOT + "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Todo> delete(@PathVariable int id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

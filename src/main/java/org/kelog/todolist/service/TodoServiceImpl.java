@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Component
 public class TodoServiceImpl implements TodoService {
@@ -23,8 +24,8 @@ public class TodoServiceImpl implements TodoService {
     }
     
     @Override
-    public Todo findById(int id) {
-        return findOrThrow(id);
+    public Optional<Todo> findById(int id) {
+        return repository.findById(id);
     }
     
     @Override

@@ -3,11 +3,12 @@ package org.kelog.todolist.service;
 import org.kelog.todolist.model.Todo;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface TodoService {
     Collection<Todo> findAll();
     
-    Todo findById(int id) throws TodoNotFoundException;
+    Optional<Todo> findById(int id);
     
     Todo create(String description, Boolean important);
     
