@@ -1,9 +1,0 @@
-{
-  "name": "frontend",
-  "version": false,
-  "dependencies": {},
-  "ambientDependencies": {
-    "gulp": "registry:dt/gulp#3.8.0+20150825164847",
-    "react": "registry:dt/react#0.14.0+20160302224448"
-  }
-}
