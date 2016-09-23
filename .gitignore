@@ -4,3 +4,4 @@ build/
 frontend/node_modules/
 public/
 integration/node_modules
+npm-debug.log
