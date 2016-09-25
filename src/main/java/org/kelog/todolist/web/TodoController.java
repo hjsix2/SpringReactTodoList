@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class TodoController {
     
     private final String ROOT = "/todoitems";
